@@ -27,7 +27,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(based_dir, '
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 
-api = Api(app,doc='/',title="My REST API")
+api = Api(app,doc='/',title="My REST API",description="REST API for Machine Learning and Cosplay Costume Database")
 db = SQLAlchemy(app)
 
 model = load_model()
@@ -102,6 +102,7 @@ class Clothes(Resource):
 
     @api.marshal_list_with(clothes_model,code=200,envelope="clothes")
     def get(self):
+        ''' Get cosplay costume data '''
         clothes = Cloth.query.all()
         return clothes
     
@@ -109,7 +110,7 @@ class Clothes(Resource):
     @api.doc(params={'product_name':'Product Name', 'character_from':'From Anime/Game', 'product_type':'Product Type',
                      'shop_name':'Shop Name', 'price':'Price'})
     def post(self):
-
+        ''' Create a new cosplay costume data '''
         product_name = request.args.get("product_name")
         character_from = request.args.get("character_from")
         product_type = request.args.get("product_type")
@@ -137,6 +138,7 @@ class Clothes(Resource):
 
     @api.marshal_with(clothes_model,code=200,envelope="book")
     def get(self, id):
+        ''' Get cosplay costume data by ID'''
         cloth = Cloth.query.get_or_404(id)
         return cloth, 200
 
@@ -144,6 +146,7 @@ class Clothes(Resource):
     @api.doc(params={'product_name':'Product Name', 'character_from':'From Anime/Game', 'product_type':'Product Type',
                      'shop_name':'Shop Name', 'price':'Price'})
     def put(self, id):
+        ''' Update a cosplay costume data'''
         cloth_to_update = Cloth.query.get_or_404(id)
 
         cloth_to_update.product_name = request.args.get('product_name')
@@ -160,6 +163,7 @@ class Clothes(Resource):
 
     @api.marshal_with(clothes_model,code=200,envelope="cloth_deleted")
     def delete(self, id):
+        ''' Delete costume data '''
         cloth_to_del = Cloth.query.get_or_404(id)
 
         db.session.delete(cloth_to_del)
