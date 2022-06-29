@@ -1,0 +1,14 @@
+Model : XGBoost Classifier
+Accuracy score : 0.8609
+Cohen's kappa score : 0.7070
+Hamming Loss : 0.1391
+F1 score : 0.8865
+Report : 
+              precision    recall  f1-score   support
+
+           0       0.85      0.79      0.82        92
+           1       0.87      0.91      0.89       138
+
+    accuracy                           0.86       230
+   macro avg       0.86      0.85      0.85       230
+weighted avg       0.86      0.86      0.86       230
