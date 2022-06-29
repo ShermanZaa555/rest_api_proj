@@ -163,7 +163,7 @@ class Clothes(Resource):
 
     @api.marshal_with(clothes_model,code=200,envelope="cloth_deleted")
     def delete(self, id):
-        ''' Delete costume data '''
+        ''' Delete cosplay costume data '''
         cloth_to_del = Cloth.query.get_or_404(id)
 
         db.session.delete(cloth_to_del)
